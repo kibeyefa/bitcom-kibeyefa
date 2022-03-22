@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="conatiner-fluid bg-dark text-white py-4">
+            <div
+                class="conatiner-fluid container-md d-flex flex-wrap justify-content-between"
+            >
+                <h3>Bitcom Interview</h3>
+
+                <div class="nav">
+                    <a href="/" id="first" class="nav-link">Home</a>
+                    <a href="/lga" class="nav-link">Lga Results</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-4 container">
+            <a href="/add" class="btn btn-link">Add results</a>
+        </div>
+
+        <div class="container mt-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="form-label">Enter polling Unit</label>
+                    <input
+                        type="text"
+                        class="form-control mb-2"
+                        placeholder="Polling Unit id"
+                        name="unitid"
+                    />
+                    <button class="btn btn-outline-dark">Check Results</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="container mt-5 mb-4">
+            <h3 class="text-capitalise">
+                {{ polling_unit.polling_unit_name.upper }}
+            </h3>
+            <ul class="list-group">
+                {% for key, value in result.items %}
+                <li class="list-group-item">{{ key }} - {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

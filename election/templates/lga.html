@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="conatiner-fluid bg-dark text-white py-4">
+            <div
+                class="conatiner-fluid container-md d-flex flex-wrap justify-content-between"
+            >
+                <h3>Bitcom Interview</h3>
+
+                <div class="nav">
+                    <a href="/" id="first" class="nav-link">Home</a>
+                    <a href="/lga" class="nav-link">Lga Results</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-4 container">
+            <a href="/add" class="btn btn-link">Add results</a>
+        </div>
+
+        <div class="container mt-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="form-label mb-2">Select LGA</label>
+                    <select
+                        class="form-select mb-2"
+                        aria-label="Default select example"
+                        name="lga"
+                    >
+                        <option selected>Select LGA:</option>
+                        {% for lga in lgas %}
+                        <option value="{{lga}}">{{ lga }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-outline-dark">Check Results</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="container mt-5 mb-4">
+            <h3 class="text-capitalise">{{ lga }}</h3>
+            <ul class="list-group">
+                {% for key, value in results.items %}
+                <li class="list-group-item">{{ key }} - {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
